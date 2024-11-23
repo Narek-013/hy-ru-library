@@ -25,7 +25,7 @@ function Home() {
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`http://localhost:3001/words?day=${storedDay}`);
+      const resp = await fetch(`http://172.20.10.13:3001/words?day=${storedDay}`);
       if (resp.ok) {
         const result = await resp.json();
         dispatch(newDay({ day: storedDay, words: result }));
