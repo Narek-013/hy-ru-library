@@ -2,6 +2,8 @@
   width: 100%;
   padding: 10px 20px;
   background-color: black;
+  position: sticky;
+  top: 0;
   .header__container {
     display: flex;
     align-items: center;
@@ -12,15 +14,23 @@
       align-items: center;
       a {
         img {
-          width: 50px;
-          height: 50px;
+          width: 70px;
+          height: 70px;
           margin-right: 55px;
+          @media (max-width: 768px) {
+            width: 60px;
+            height: 60px;
+            margin-right: 32px;
+          }
         }
       }
       ul {
         display: flex;
         column-gap: 40px;
         justify-content: center;
+        @media (max-width: 520px) {
+          display: none;
+        }
         li {
           a {
             color: white;
@@ -49,12 +59,15 @@
             &:hover::after {
               width: 100%;
             }
+            @media (max-width: 768px) {
+              font-size: 14px;
+            }
           }
         }
       }
     }
-    .header__contact {
-      button {
+    .header__btns {
+      .header__btns-mode {
         padding: 8px 16px;
         border-radius: 8px;
         background-color: red;
@@ -65,7 +78,80 @@
           color: white;
           opacity: 0.8;
         }
+        @media (max-width: 520px) {
+          display: none;
+        }
       }
+      .header__btns-burger {
+        display: none;
+        @media (max-width: 520px) {
+          display: flex;
+        }
+      }
+    }
+  }
+  .burger-menu {
+    display: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    border-top: 1px solid white;
+    top: 82px;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+    background-color: black;
+    @media (max-width: 520px) {
+      display: flex;
+      flex-direction: column;
+    }
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      row-gap: 40px;
+      padding: 20px;
+      li {
+        a {
+          color: white;
+          font-family: Inter;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          transition: all 0.2s ease-in-out;
+          display: inline-block;
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: 0.5s ease-in-out;
+            box-shadow: 0px 0px 20px whitesmoke;
+            text-shadow: 0px 2px 20px whitesmoke;
+          }
+          &:hover::after {
+            width: 100%;
+          }
+        }
+      }
+      button {
+          padding: 8px 16px;
+          border-radius: 8px;
+          background-color: red;
+          border: none;
+          outline: none;
+          transition: all 0.2s;
+          &:hover {
+            color: white;
+            opacity: 0.8;
+          }
+        }
     }
   }
 }

@@ -6,7 +6,6 @@ import "./home.scss";
 function Home() {
   const dispatch = useDispatch();
   const { day, words } = useSelector(selectWords);
-
   const updateDay = useCallback(() => {
     const storedDay = parseInt(localStorage.getItem("day")) || 0;
     const lastUpdated = localStorage.getItem("lastUpdated") || "";
