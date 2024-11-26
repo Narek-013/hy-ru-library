@@ -7,7 +7,6 @@ function Home() {
   const dispatch = useDispatch();
   const { day, words } = useSelector(selectWords);
 
-  // Կանխելու համար օրվա փոփոխությունը
   const updateDay = useCallback(() => {
     const storedDay = parseInt(localStorage.getItem("day")) || 0;
     const lastUpdated = localStorage.getItem("lastUpdated") || "";
@@ -22,7 +21,6 @@ function Home() {
     }
   }, [dispatch]);
 
-  // Fetch բառերը տվյալ օրվա համար
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
@@ -39,19 +37,16 @@ function Home() {
     }
   }, [dispatch]);
 
-  // Օրվա թարմացում և fetch
   useEffect(() => {
     updateDay();
     fetchWords();
 
     const intervalId = setInterval(() => {
       updateDay();
-    }, 24 * 60 * 60 * 1000); // 24 ժամվա համար
-
+    }, 24 * 60 * 60 * 1000);
     return () => clearInterval(intervalId);
   }, [updateDay, fetchWords]);
 
-  // Prev button handler
   const prevDay = () => {
     const storedDay = parseInt(localStorage.getItem("day")) || 0;
     if (storedDay > 1) {
@@ -62,7 +57,6 @@ function Home() {
     }
   };
 
-  // Next button handler
   const nextDay = () => {
     const storedDay = parseInt(localStorage.getItem("day")) || 0;
     const nextDay = storedDay + 1;
@@ -70,6 +64,8 @@ function Home() {
     dispatch(newDay({ day: nextDay, words: [] }));
     fetchWords();
   };
+
+  
 
   return (
     <div className="home">
@@ -79,7 +75,7 @@ function Home() {
           {words ? (
             Object.entries(words).map(([key, value]) => (
               <li key={key}>
-                {key}: <span>{value}</span>
+                {key} <span>{value}</span>
               </li>
             ))
           ) : (
@@ -87,8 +83,10 @@ function Home() {
           )}
         </ul>
         <div className="home__days">
-          <button onClick={prevDay}>Prev</button>
-          <button onClick={nextDay}>Next</button>
+          <button className={day <= 1 ? "btn_color" : ""} onClick={prevDay}>
+            Предыдущий
+          </button>
+          <button onClick={nextDay}>Следующий</button>
         </div>
       </div>
     </div>

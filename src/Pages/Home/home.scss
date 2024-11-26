@@ -4,6 +4,10 @@
   background-color: #2e2e2e;
   background-image: url("https://i.pinimg.com/736x/20/83/ae/2083ae350ed74dc669609780dfb796eb.jpg");
   height: 800px;
+  @media (max-width: 520px) {
+    height: 740px;
+    padding: 20px 35px;
+  }
   .home__container {
     display: flex;
     justify-content: center;
@@ -41,13 +45,41 @@
         width: 100%;
         max-width: 400px;
         @media (max-width: 520px) {
-          font-size: 17px;
+          font-size: 19px;
           font-weight: 700;
         }
         span {
           margin-left: auto;
           font-weight: 400;
         }
+      }
+    }
+    .home__days {
+      margin-top: 32px;
+      display: flex;
+      column-gap: 30px;
+      @media (max-width: 520px) {
+        flex-direction: column;
+        row-gap: 10px;
+        width: 100%;
+      }
+      button {
+        padding: 8px 16px;
+        border-radius: 22px;
+        outline: none;
+        font-size: 18px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+        border: none;
+        letter-spacing: 1.4px;
+      }
+      button:nth-child(1) {
+      }
+      button:nth-child(2) {
+        color: red;
+      }
+      .btn_color {
+        background-color: gray;
       }
     }
   }

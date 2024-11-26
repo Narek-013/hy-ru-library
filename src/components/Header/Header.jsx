@@ -3,13 +3,18 @@ import { Imgs } from "../../Images/Imgs";
 import { Sling } from "hamburger-react";
 import "./header.scss";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeMenuBurger, selectBurger, toggleMenu } from "../../store/Slices/headerSlice/headerSlice";
 
 const Header = () => {
   const burger_menu = useRef();
+  const burger = useSelector(selectBurger);
+  const dispatch = useDispatch();
 
   const closeModal = (ev) => {
     if (ev.target.localName === "li" || ev.target.localName === "a" || ev.target.localName === "img") {
       burger_menu.current.style.height = `0px`;
+      dispatch(closeMenuBurger());
     }
   };
 
@@ -34,14 +39,23 @@ const Header = () => {
           </ul>
         </div>
         <div className="header__btns">
-          <button className="header__btns-mode">Dark</button>
+          <div className="header__btns-contacts">
+            <a href="tel:+37477873707">
+              <img src={Imgs.call} alt="images" /> +374 77 87 37 07
+            </a>
+            <a href="mailto:meliksetyan415@gmail.com">
+              <img src={Imgs.sms} alt="images" /> meliksetyan415@gmail.com
+            </a>
+          </div>
           <div className="header__btns-burger">
             <Sling
               size={28}
               duration={0.8}
               direction="right"
               color="#6B46C1"
+              toggled={burger}
               onToggle={() => {
+                dispatch(toggleMenu());
                 if (burger_menu.current.offsetHeight < 10) {
                   burger_menu.current.style.height = `${burger_menu.current.scrollHeight}px`;
                 } else {
@@ -63,7 +77,12 @@ const Header = () => {
           <li>
             <NavLink to="/languages">Все языки</NavLink>
           </li>
-          <button>Dark</button>
+          <a href="tel:+37477873707">
+            <img src={Imgs.call} alt="images" /> +374 77 87 37 07
+          </a>
+          <a href="mailto:meliksetyan415@gmail.com">
+            <img src={Imgs.sms} alt="images" /> meliksetyan415@gmail.com
+          </a>
         </ul>
       </div>
     </div>
