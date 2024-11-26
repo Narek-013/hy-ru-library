@@ -6,10 +6,11 @@ import "./home.scss";
 function Home() {
   const dispatch = useDispatch();
   const { day, words } = useSelector(selectWords);
+
+  // Կանխելու համար օրվա փոփոխությունը
   const updateDay = useCallback(() => {
     const storedDay = parseInt(localStorage.getItem("day")) || 0;
     const lastUpdated = localStorage.getItem("lastUpdated") || "";
-
     const today = new Date().toISOString().split("T")[0];
 
     if (lastUpdated !== today) {
@@ -21,10 +22,12 @@ function Home() {
     }
   }, [dispatch]);
 
+  // Fetch բառերը տվյալ օրվա համար
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`https://servinio-production.up.railway.app/?day=${storedDay}`);
+      const resp = await fetch(`https://hyrus-production.up.railway.app/api/data/${storedDay}`);
+
       if (resp.ok) {
         const result = await resp.json();
         dispatch(newDay({ day: storedDay, words: result }));
@@ -36,33 +39,57 @@ function Home() {
     }
   }, [dispatch]);
 
+  // Օրվա թարմացում և fetch
   useEffect(() => {
     updateDay();
     fetchWords();
 
     const intervalId = setInterval(() => {
       updateDay();
-    }, 24 * 60 * 60 * 1000);
+    }, 24 * 60 * 60 * 1000); // 24 ժամվա համար
 
     return () => clearInterval(intervalId);
   }, [updateDay, fetchWords]);
+
+  // Prev button handler
+  const prevDay = () => {
+    const storedDay = parseInt(localStorage.getItem("day")) || 0;
+    if (storedDay > 1) {
+      const prevDay = storedDay - 1;
+      localStorage.setItem("day", prevDay);
+      dispatch(newDay({ day: prevDay, words: [] }));
+      fetchWords();
+    }
+  };
+
+  // Next button handler
+  const nextDay = () => {
+    const storedDay = parseInt(localStorage.getItem("day")) || 0;
+    const nextDay = storedDay + 1;
+    localStorage.setItem("day", nextDay);
+    dispatch(newDay({ day: nextDay, words: [] }));
+    fetchWords();
+  };
 
   return (
     <div className="home">
       <div className="home__container container">
         <h1>Այսօրվա բառերը Օր {day}</h1>
         <ul>
-          {words.length > 0 ? (
-            words.map((word, index) => (
-              <li key={index}>
-                {word.word}
-                <span>{word.value}</span>
+          {words ? (
+            Object.entries(words).map(([key, value]) => (
+              <li key={key}>
+                {key}: <span>{value}</span>
               </li>
             ))
           ) : (
             <li>No words available for this day.</li>
           )}
         </ul>
+        <div className="home__days">
+          <button onClick={prevDay}>Prev</button>
+          <button onClick={nextDay}>Next</button>
+        </div>
       </div>
     </div>
   );
