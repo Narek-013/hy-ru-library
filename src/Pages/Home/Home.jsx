@@ -24,7 +24,7 @@ function Home() {
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`https://neat-rings-smoke.loca.lt/words?day=${storedDay}`);
+      const resp = await fetch(`https://servinio-production.up.railway.app/?day=${storedDay}`);
       if (resp.ok) {
         const result = await resp.json();
         dispatch(newDay({ day: storedDay, words: result }));
