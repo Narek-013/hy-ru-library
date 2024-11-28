@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchChangeText = createAsyncThunk("words/fetchChangeText", async ([word, day, newText, idx]) => {
   try {
-    const response = await fetch("https://hyrus-production.up.railway.app/api/data/update-word", {
+    const response = await fetch("https://hyrus-production.up.railway.app/api/ru/update-word", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

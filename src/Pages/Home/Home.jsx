@@ -33,7 +33,7 @@ function Home() {
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`https://hyrus-production.up.railway.app/api/data/${storedDay}`);
+      const resp = await fetch(`https://hyrus-production.up.railway.app/api/ru/${storedDay}`);
 
       if (resp.ok) {
         const result = await resp.json();
