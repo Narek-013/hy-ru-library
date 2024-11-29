@@ -6,7 +6,6 @@ import { Imgs } from "../../Images/Imgs";
 import "./home.scss";
 
 function Home() {
-
   const dispatch = useDispatch();
   const { day, wordArray } = useSelector(selectWords);
 
@@ -26,7 +25,6 @@ function Home() {
       localStorage.setItem("lastUpdated", today);
 
       dispatch(newDay({ day: storedDay, words: [] }));
-      
     }
   }, [dispatch]);
 
@@ -77,7 +75,6 @@ function Home() {
     fetchWords();
   };
 
-
   return (
     <div className="home">
       <div className="home__container container">
@@ -87,19 +84,14 @@ function Home() {
             wordArray.map(({ key, value, isEdit }, idx) => (
               <li key={idx} className={isEdit ? "word-form" : "word-li"}>
                 {isEdit ? (
-                  <EditWord word={{key, value, isEdit}} idx={idx} day={day}/>
+                  <EditWord word={{ key, value, isEdit }} idx={idx} day={day} />
                 ) : (
                   <>
                     {key}
                     <span>{value}</span>
                   </>
                 )}
-                <img
-                  className="edit"
-                  onClick={() => dispatch(editItem(idx))}
-                  src={Imgs.edit}
-                  alt="edit"
-                />
+                <img className="edit" onClick={() => dispatch(editItem(idx))} src={Imgs.edit} alt="edit" />
               </li>
             ))
           ) : (
