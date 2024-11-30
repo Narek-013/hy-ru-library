@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./about.scss";
 import { changeValue, selectDownloadBtn } from "../../store/Slices/downloadBtn/downloadBtn";
+import { Imgs } from "../../Images/Imgs";
 
 const About = () => {
 
@@ -29,7 +30,7 @@ const About = () => {
             return (
               <div className="about__langs-item" key={idx}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/3979/3979306.png" alt="txtImg" />
+                  <img src={Imgs.txt} alt="txtImg" />
                   <div className="about__langs-info">
                     <span>Имя: {el.name}</span>
                     <span>слово: {el.col}</span>

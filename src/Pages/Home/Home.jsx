@@ -4,10 +4,13 @@ import { editItem, newDay, selectWords } from "../../store/Slices/wordsSlice/wor
 import EditWord from "../../components/EditWord/EditWord";
 import { Imgs } from "../../Images/Imgs";
 import "./home.scss";
+import { selectAdmin } from "../../store/Slices/admin/adminSlice";
 
 function Home() {
   const dispatch = useDispatch();
   const { day, wordArray } = useSelector(selectWords);
+  const { adminSt } = useSelector(selectAdmin);
+
 
   const updateDay = useCallback(() => {
     let storedDay = parseInt(localStorage.getItem("day")) || 0;
@@ -75,6 +78,7 @@ function Home() {
     fetchWords();
   };
 
+
   return (
     <div className="home">
       <div className="home__container container">
@@ -91,7 +95,7 @@ function Home() {
                     <span>{value}</span>
                   </>
                 )}
-                <img className="edit" onClick={() => dispatch(editItem(idx))} src={Imgs.edit} alt="edit" />
+                {adminSt && <img className="edit" onClick={() => dispatch(editItem(idx))} src={Imgs.edit} alt="edit" />}
               </li>
             ))
           ) : (

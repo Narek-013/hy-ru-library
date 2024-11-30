@@ -5,10 +5,12 @@ import "./header.scss";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeMenuBurger, selectBurger, toggleMenu } from "../../store/Slices/headerSlice/headerSlice";
+import { selectAdmin } from "../../store/Slices/admin/adminSlice";
 
 const Header = () => {
   const burger_menu = useRef();
   const burger = useSelector(selectBurger);
+  const { adminSt } = useSelector(selectAdmin);
   const dispatch = useDispatch();
 
   const closeModal = (ev) => {
@@ -31,10 +33,10 @@ const Header = () => {
               <NavLink to="/">Основной</NavLink>
             </li>
             <li>
-              <NavLink to="/all-words">Все слова</NavLink>
+              <NavLink to="/languages">Все языки</NavLink>
             </li>
             <li>
-              <NavLink to="/languages">Все языки</NavLink>
+              <NavLink to="/admin">{adminSt ? "Админ" : "Войти"}</NavLink>
             </li>
           </ul>
         </div>
@@ -72,10 +74,10 @@ const Header = () => {
             <NavLink to="/">Основной</NavLink>
           </li>
           <li>
-            <NavLink to="/all-words">Все слова</NavLink>
+            <NavLink to="/languages">Все языки</NavLink>
           </li>
           <li>
-            <NavLink to="/languages">Все языки</NavLink>
+            <NavLink to="/admin">Войти</NavLink>
           </li>
           <a href="tel:+37477873707">
             <img src={Imgs.call} alt="images" /> +374 77 87 37 07

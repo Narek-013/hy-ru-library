@@ -5,6 +5,7 @@ import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
 import LangDownloader from "../components/LangDownloader/LangDownloader";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
+import Admin from "../Pages/Admin/Admin";
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
           <Route index element={<Home />} />
           <Route path="/languages" element={<About />} />
           <Route path="/languages/:lang" element={<LangDownloader />} />
+          <Route path="/admin" element={<Admin/>}/>
           <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
       </Routes>
