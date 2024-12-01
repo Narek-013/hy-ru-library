@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editItem, newDay, selectWords } from "../../store/Slices/wordsSlice/wordsSlice";
+import { changeDay, editItem, newDay, selectWords } from "../../store/Slices/wordsSlice/wordsSlice";
 import EditWord from "../../components/EditWord/EditWord";
 import { Imgs } from "../../Images/Imgs";
-import "./home.scss";
 import { selectAdmin } from "../../store/Slices/admin/adminSlice";
+import "./home.scss";
+// import { fetchResponseForRow } from "../../store/Slices/wordsSlice/API";
 
 function Home() {
   const dispatch = useDispatch();
@@ -34,10 +35,12 @@ function Home() {
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`https://hyrus-production.up.railway.app/api/ru/${storedDay}`);
+      const resp = await fetch(`http://localhost:5000/api/ru/${storedDay}`);
 
       if (resp.ok) {
         const result = await resp.json();
+        console.log(result);
+        
         dispatch(newDay({ day: storedDay, words: result }));
       } else {
         console.error("Failed to fetch words:", resp.status);
@@ -62,7 +65,7 @@ function Home() {
     if (storedDay > 1) {
       const prevDay = storedDay - 1;
       localStorage.setItem("day", prevDay);
-      dispatch(newDay({ day: prevDay, words: {} }));
+      dispatch(changeDay(prevDay));
       fetchWords();
     }
   };
@@ -74,10 +77,14 @@ function Home() {
       nextDay = 1;
     }
     localStorage.setItem("day", nextDay);
-    dispatch(newDay({ day: nextDay, words: {} }));
+    dispatch(changeDay(nextDay));
     fetchWords();
   };
 
+  
+  // useEffect(() => {
+  //   dispatch(fetchResponseForRow(wordArray));
+  // },[wordArray,day])
 
   return (
     <div className="home">
@@ -85,14 +92,14 @@ function Home() {
         <h1>Այսօրվա բառերը Օր {day}</h1>
         <ul>
           {wordArray.length > 0 ? (
-            wordArray.map(({ key, value, isEdit }, idx) => (
-              <li key={idx} className={isEdit ? "word-form" : "word-li"}>
-                {isEdit ? (
-                  <EditWord word={{ key, value, isEdit }} idx={idx} day={day} />
+            wordArray.map((el, idx) => (
+              <li key={idx} className={el.isEdit ? "word-form" : "word-li"}>
+                {el.isEdit ? (
+                  <EditWord word={el} idx={idx} day={day} />
                 ) : (
                   <>
-                    {key}
-                    <span>{value}</span>
+                    {el.key}
+                    <span>{el.value}</span>
                   </>
                 )}
                 {adminSt && <img className="edit" onClick={() => dispatch(editItem(idx))} src={Imgs.edit} alt="edit" />}
