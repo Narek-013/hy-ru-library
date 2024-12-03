@@ -28,19 +28,20 @@ export const fetchChangeText = createAsyncThunk("words/fetchChangeText", async (
 
 // export const fetchResponseForRow = createAsyncThunk("actionPlanner/fetchResponseForRow", async (wordArray) => {
 //   const cohereApiKey = "OyYxXlFPxmLyZsqUEVScUHpFOTt1nz0vyPlaXJ37";
-//   const query = `Return my provided array and translate the words under the key into Armenian, place them under the value, and return the array in the same format.`;
+//   const query = `Translate the following Russian word into Armenian. Return only the translated word, without any additional text or explanation. The word is: `;
 
 //   let queryWord = wordArray.map((el) => {
 //     return el.key;
 //   });
 
   
+  
 //   try {
 //     const response = await axios.post(
 //       "https://api.cohere.ai/v1/generate",
 //       {
 //         model: "command-xlarge-nightly",
-//         prompt: query + JSON.stringify(wordArray),
+//         prompt: query + JSON.stringify(queryWord),
 //         max_tokens: 200,
 //         temperature: 0.7,
 //       },
@@ -52,7 +53,9 @@ export const fetchChangeText = createAsyncThunk("words/fetchChangeText", async (
 //       }
 //     );
 
-//     console.log(response.data.generations[0].text);
+//     let x = await response.data.generations[0].text;
+//     console.log(x);
+
     
 //     // return response.data.generations[0].text;
 //   } catch (error) {}

@@ -4,8 +4,8 @@ import { changeDay, editItem, newDay, selectWords } from "../../store/Slices/wor
 import EditWord from "../../components/EditWord/EditWord";
 import { Imgs } from "../../Images/Imgs";
 import { selectAdmin } from "../../store/Slices/admin/adminSlice";
-import "./home.scss";
 // import { fetchResponseForRow } from "../../store/Slices/wordsSlice/API";
+import "./home.scss";
 
 function Home() {
   const dispatch = useDispatch();
@@ -35,11 +35,10 @@ function Home() {
   const fetchWords = useCallback(async () => {
     try {
       const storedDay = parseInt(localStorage.getItem("day")) || 0;
-      const resp = await fetch(`http://localhost:5000/api/ru/${storedDay}`);
+      const resp = await fetch(`https://hyrus-production.up.railway.app/api/ru/${storedDay}`);
 
       if (resp.ok) {
         const result = await resp.json();
-        console.log(result);
         
         dispatch(newDay({ day: storedDay, words: result }));
       } else {
