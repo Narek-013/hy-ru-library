@@ -77,7 +77,7 @@ const Header = () => {
             <NavLink to="/languages">Все языки</NavLink>
           </li>
           <li>
-            <NavLink to="/admin">Войти</NavLink>
+            <NavLink to="/admin">{adminSt ? "Админ" : "Войти"}</NavLink>
           </li>
           <a href="tel:+37477873707">
             <img src={Imgs.call} alt="images" /> +374 77 87 37 07

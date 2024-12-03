@@ -1,0 +1,99 @@
+.admin {
+  width: 100%;
+  padding: 45px 20px;
+  background: #756f6f;
+  @media (max-width: 520px) {
+    padding: 20px;
+  }
+  .admin__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 25px;
+    padding-bottom: 50px;
+    h1 {
+      color: white;
+      margin-top: 35px;
+      font-size: 34px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      @media (max-width: 520px) {
+        font-size: 27px;
+      }
+      @media (max-width: 400px) {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      text-align: center;
+      max-width: 500px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: whitesmoke;
+    }
+    button {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      width: 100%;
+      margin-top: 10px;
+      max-width: 210px;
+      padding: 6px 8px;
+      border-radius: 22px;
+      background-color: #756f6f;
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      transition: all 0.3s;
+      border: 1px solid #756f6f;
+      cursor: pointer;
+      color: white;
+      background-color: #756f6f;
+      border: 1px solid #2e2e2e;
+      &:hover {
+        background-color: #2e2e2e;
+      }
+    }
+    form {
+      display: flex;
+      border-radius: 16px;
+      background: linear-gradient(to right, #ba84fe, purple);
+      flex-direction: column;
+      row-gap: 13px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      max-width: 400px;
+      padding-bottom: 78px;
+      margin-top: 40px;
+      @media (max-width: 520px) {
+        max-width: 310px;
+      }
+      p {
+        margin-bottom: 30px;
+      }
+      input {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #756f6f;
+        color: #2e2e2e;
+        width: 100%;
+        font-size: 16px;
+        max-width: 280px;
+        padding: 10px 16px;
+        border-radius: 22px;
+        border: none;
+        outline: none;
+        color: white;
+        font-weight: 500;
+        @media (max-width: 520px) {
+          max-width: 240px;
+        }
+        &::placeholder {
+          color: whitesmoke;
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+}
